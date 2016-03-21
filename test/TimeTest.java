@@ -108,43 +108,43 @@ public class TimeTest {
     
     @Test
     public void testGetDayOfWeekMonday() {
-        Time monday = new Time(2016, 3, 21, 15, 15);        
+        Time monday = new Time(2016, 3, 25, 15, 15);        
         assertEquals("MON should be returned. Instead " + monday.getDayInWeek().toString() + " was returned.", monday.getDayInWeek(), DayInWeek.MON);
     }
     
     @Test
     public void testGetDayOfWeekTuesday() {
-        Time tuesday = new Time(2016, 3, 22, 15, 15);
+        Time tuesday = new Time(2016, 3, 26, 15, 15);
         assertEquals("TUE should be returned. Instead " + tuesday.getDayInWeek().toString() + " was returned.", tuesday.getDayInWeek(), DayInWeek.TUE);
     }
     
     @Test
     public void testGetDayOfWeekWednesday() {
-        Time wednesday = new Time(2016, 3, 23, 15, 15);
+        Time wednesday = new Time(2016, 3, 27, 15, 15);
         assertEquals("WED should be returned. Instead " + wednesday.getDayInWeek().toString() + " was returned.", wednesday.getDayInWeek(), DayInWeek.WED);
     }
     
     @Test
     public void testGetDayOfWeekThursday() {
-        Time thursday = new Time(2016, 3, 24, 15, 15);
+        Time thursday = new Time(2016, 3, 28, 15, 15);
         assertEquals("THU should be returned. Instead " + thursday.getDayInWeek().toString() + " was returned.", thursday.getDayInWeek(), DayInWeek.THU);
     }
     
     @Test
     public void testGetDayOfWeekFriday() {
-        Time friday = new Time(2016, 3, 25, 15, 15);
+        Time friday = new Time(2016, 3, 29, 15, 15);
         assertEquals("FRI should be returned. Instead " + friday.getDayInWeek().toString() + " was returned.", friday.getDayInWeek(), DayInWeek.FRI);
     }
     
     @Test
     public void testGetDayOfWeekSaturday() {
-        Time saturday = new Time(2016, 3, 26, 15, 15);
+        Time saturday = new Time(2016, 3, 30, 15, 15);
         assertEquals("SAT should be returned. Instead " + saturday.getDayInWeek().toString() + " was returned.", saturday.getDayInWeek(), DayInWeek.SAT);
     }
     
     @Test
     public void testGetDayOfWeekSunday() {
-        Time sunday = new Time(2016, 3, 27, 15, 15);
+        Time sunday = new Time(2016, 3, 31, 15, 15);
         assertEquals("SUN should be returned. Instead " + sunday.getDayInWeek().toString() + " was returned.", sunday.getDayInWeek(), DayInWeek.SUN);
     }
     
@@ -175,20 +175,20 @@ public class TimeTest {
     
     @Test
     public void testPlus() {
-        t.plus(10);
+        t = (Time) t.plus(10);
         assertEquals("getMinutes() should return 40. Instead " + t.getMinutes() + " was returned", t.getMinutes(), 40);
     }
     
     @Test
     public void testPlusAbove60() {
-        t.plus(40);
+        t = (Time) t.plus(40);
         assertEquals("getMinutes() should return 10. Instead " + t.getMinutes() + " was returned", t.getMinutes(), 10);
         assertEquals("getHours() should return 11. Instead " + t.getHours() + " was returned", t.getHours(), 11);
     }
     
     @Test
     public void testDifference() {
-        Time diff = new Time(year, normalMonth, normalDay, normalHour, normalMin + 10);
+        Time diff = new Time(year, normalMonth, normalDay, normalHour, 40);
         
         int minDifference = t.difference(diff);
         
@@ -204,19 +204,17 @@ public class TimeTest {
     
     @Test
     public void testCompareToHigher() {
-        Time later = t;
-        later.plus(10);
+        Time later = (Time) t.plus(10);
         int i = t.compareTo(later);
         
-        assertEquals(i, -1);
+        assertEquals(i, 1);
     }
     
     @Test
     public void testCompareToLower() {
-        Time later = t;
-        later.plus(-10);
+        Time later = (Time) t.plus(-10);
         int i = t.compareTo(later);
         
-        assertEquals(i, 1);
+        assertEquals(i, -1);
     }
 }

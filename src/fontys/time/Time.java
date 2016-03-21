@@ -5,6 +5,7 @@
 package fontys.time;
 
 import java.util.GregorianCalendar;
+import java.lang.Math;
 
 /**
  *
@@ -37,7 +38,7 @@ public class Time implements ITime {
         if (h < 0 || h > 23) {
             throw new IllegalArgumentException("hours must be within 0..23");
         }
-        if (m < 0 || m > 59) {
+        if (min < 0 || min > 59) {
             throw new IllegalArgumentException("minutes must be within 0..59");
         }
         
@@ -78,7 +79,7 @@ public class Time implements ITime {
 
     @Override
     public int getMonth() {
-        return gc.get(GregorianCalendar.MONTH) + 1;
+        return gc.get(GregorianCalendar.MONTH);
     }
 
     @Override
@@ -112,6 +113,11 @@ public class Time implements ITime {
     @Override
     public int difference(ITime time) {
         Time t = (Time) time;
-        return (int) ((this.gc.getTimeInMillis() - t.gc.getTimeInMillis()) / 600000);
+        int test = (int) ((this.gc.getTimeInMillis() - t.gc.getTimeInMillis()) / 60000);
+        int result = (int) Math.sqrt(Math.pow(test, 2));
+        System.out.println(test);
+        System.out.println(this.gc.getTimeInMillis());
+        System.out.println(t.gc.getTimeInMillis());
+        return result;
     }
 }

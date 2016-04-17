@@ -83,7 +83,7 @@ public class TimeSpan implements ITimeSpan {
             throw new IllegalArgumentException("length of period must be positive");
         }
         
-        et = et.plus(minutes);
+        bt = bt.plus(minutes);
     }
 
     @Override
@@ -94,30 +94,10 @@ public class TimeSpan implements ITimeSpan {
 
     @Override
     public ITimeSpan unionWith(ITimeSpan timeSpan) {
-        if (bt.compareTo(timeSpan.getEndTime()) > 0 || et.compareTo(timeSpan.getBeginTime()) < 0) {
+        if (bt.compareTo(timeSpan.getEndTime()) < 0 || et.compareTo(timeSpan.getBeginTime()) > 0) {
             return null;
         }
         
-        ITime begintime, endtime;
-        if (bt.compareTo(timeSpan.getBeginTime()) < 0) {
-            begintime = bt;
-        } else {
-            begintime = timeSpan.getBeginTime();
-        }
-
-        if (et.compareTo(timeSpan.getEndTime()) > 0) {
-            endtime = et;
-        } else {
-            endtime = timeSpan.getEndTime();
-        }
-
-        return new TimeSpan(begintime, endtime);
-
-    }
-
-    @Override
-    public ITimeSpan intersectionWith(ITimeSpan timeSpan) {
-
         ITime begintime, endtime;
         if (bt.compareTo(timeSpan.getBeginTime()) > 0) {
             begintime = bt;
@@ -131,7 +111,27 @@ public class TimeSpan implements ITimeSpan {
             endtime = timeSpan.getEndTime();
         }
 
-        if (begintime.compareTo(endtime) >= 0) {
+        return new TimeSpan(begintime, endtime);
+
+    }
+
+    @Override
+    public ITimeSpan intersectionWith(ITimeSpan timeSpan) {
+
+        ITime begintime, endtime;
+        if (bt.compareTo(timeSpan.getBeginTime()) < 0) {
+            begintime = bt;
+        } else {
+            begintime = timeSpan.getBeginTime();
+        }
+
+        if (et.compareTo(timeSpan.getEndTime()) > 0) {
+            endtime = et;
+        } else {
+            endtime = timeSpan.getEndTime();
+        }
+
+        if (begintime.compareTo(endtime) <= 0) {
             return null;
         }
 

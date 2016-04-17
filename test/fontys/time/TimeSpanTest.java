@@ -239,15 +239,40 @@ public class TimeSpanTest {
      */
     @Test
     public void testIntersectionWith()
-    {
+    {        
         System.out.println("intersectionWith");
-        ITimeSpan timeSpan = null;
-        TimeSpan instance = null;
-        ITimeSpan expResult = null;
-        ITimeSpan result = instance.intersectionWith(timeSpan);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        TimeSpan ts3 = new TimeSpan(t1, t2);
+        t1= new Time(2012,2,10,12,20); t2= new Time(2012,2,10,12,21); t3= new Time(2012,2,10,12,22); t4= new Time(2012,2,10,12,23);
+        ts1 = new TimeSpan(t1,t2);
+        ts2 = new TimeSpan(t3,t4);
+        ts3 = (TimeSpan)ts1.intersectionWith(ts2);
+        assertEquals(null, ts3);
+        ts3 = (TimeSpan)ts2.intersectionWith(ts1);
+        assertEquals(null, ts3);
+        
+        ts1 = new TimeSpan(t1,t4);
+        ts2 = new TimeSpan(t2,t3);
+        ts3 = (TimeSpan)ts1.intersectionWith(ts2); 
+        assertEquals(21, ts3.getBeginTime().getMinutes());
+        assertEquals(22, ts3.getEndTime().getMinutes());        
+        
+        ts1 = new TimeSpan(t2,t4);
+        ts2 = new TimeSpan(t1,t3);
+        ts3 = (TimeSpan)ts1.intersectionWith(ts2); 
+        assertEquals(21, ts3.getBeginTime().getMinutes());
+        assertEquals(22, ts3.getEndTime().getMinutes());
+        
+        ts1 = new TimeSpan(t1,t4);
+        ts2 = new TimeSpan(t1,t3);
+        ts3 = (TimeSpan)ts1.intersectionWith(ts2); 
+        assertEquals(20, ts3.getBeginTime().getMinutes());
+        assertEquals(22, ts3.getEndTime().getMinutes());
+        
+        ts1 = new TimeSpan(t1,t4);
+        ts2 = new TimeSpan(t2,t4);
+        ts3 = (TimeSpan)ts1.intersectionWith(ts2); 
+        assertEquals(21, ts3.getBeginTime().getMinutes());
+        assertEquals(23, ts3.getEndTime().getMinutes());    
     }
 
 }

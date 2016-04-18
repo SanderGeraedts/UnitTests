@@ -118,10 +118,12 @@ public class TimeSpanTest {
     public void testSetBeginTime()
     {
         System.out.println("setBeginTime");
-        ITime beginTime =  t1;
+        ITime beginTime = new Time(2016, 3, 12, 12, 21);
         TimeSpan instance = ts2;
         instance.setBeginTime(beginTime);      
         ts1.setBeginTime(t5);
+        
+        
         
     }
 
@@ -135,7 +137,7 @@ public class TimeSpanTest {
         ITime endTime = t6;
         TimeSpan instance = ts2;
         instance.setEndTime(endTime);
-        ts2.setEndTime(t1);
+        ts2.setEndTime(t3);
     }
 
     /**

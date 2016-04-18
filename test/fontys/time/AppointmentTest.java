@@ -30,8 +30,6 @@ public class AppointmentTest {
     private String subject2 = "subject2";
     private Contact c1;
     private Contact c2;
-    ArrayList<Contact> a;
-    Iterator<Contact> c;
 
     public AppointmentTest()
     {
